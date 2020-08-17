@@ -29,24 +29,25 @@ export interface AwsStaticWebsiteCdkProps {
 }
 
 export class AwsStaticWebsiteCdk extends cdk.Construct {
-  public readonly queueArn: string;
+  public readonly s3Bucket: s3.Bucket;
+  public readonly distribution: cloudfront.CloudFrontWebDistribution;
 
   constructor(scope: cdk.Construct, id: string, props: AwsStaticWebsiteCdkProps) {
     super(scope, id);
 
     const hostName = `${props.recordName}.${props.domainZoneName}`;
 
-    const bucket = new s3.Bucket(this, 'WebBucket', {
+    this.s3Bucket = new s3.Bucket(this, 'WebBucket', {
       publicReadAccess: true,
       removalPolicy: cdk.RemovalPolicy.DESTROY,
       websiteIndexDocument: "index.html",
       bucketName: hostName,
     })
 
-    const distribution = new cloudfront.CloudFrontWebDistribution(this, 'Distribution', {
+    this.distribution = new cloudfront.CloudFrontWebDistribution(this, 'Distribution', {
       originConfigs: [{
         customOriginSource: {
-          domainName: bucket.bucketWebsiteDomainName,
+          domainName: this.s3Bucket.bucketWebsiteDomainName,
           originProtocolPolicy: cloudfront.OriginProtocolPolicy.HTTP_ONLY
         },
         behaviors: [{
@@ -71,14 +72,14 @@ export class AwsStaticWebsiteCdk extends cdk.Construct {
     new route53.ARecord(this, 'ARecord', {
       zone,
       recordName: props.recordName,
-      target: route53.RecordTarget.fromAlias(new route53targets.CloudFrontTarget(distribution)),
+      target: route53.RecordTarget.fromAlias(new route53targets.CloudFrontTarget(this.distribution)),
       ttl: cdk.Duration.minutes(5),
     })
 
     const deployment = new s3Deployment.BucketDeployment(this, "DeployWebsite", {
       sources: props.source,
-      destinationBucket: bucket,
-      distribution,
+      destinationBucket: this.s3Bucket,
+      distribution: this.distribution,
       distributionPaths: props.distributionPaths,
       retainOnDelete: false,
       storageClass: s3Deployment.StorageClass.INTELLIGENT_TIERING,
