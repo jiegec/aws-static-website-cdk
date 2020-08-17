@@ -1,12 +1,10 @@
-# Welcome to your CDK TypeScript Construct Library project!
+# aws-static-website-cdk
 
-You should explore the contents of this project. It demonstrates a CDK Construct Library that includes a construct (`AwsStaticWebsiteCdk`)
-which contains an Amazon SQS queue that is subscribed to an Amazon SNS topic.
+Deploy a static website to AWS using S3+Cloudfront+Route53 combination.
 
-The construct defines an interface (`AwsStaticWebsiteCdkProps`) to configure the visibility timeout of the queue.
+This CDK construct provides:
 
-## Useful commands
-
- * `npm run build`   compile typescript to js
- * `npm run watch`   watch for changes and compile
- * `npm run test`    perform the jest unit tests
+- create a public accessible S3 bucket
+- create a CloudFront distribution
+- setup A record in route53
+- publish data to S3 bucket content
