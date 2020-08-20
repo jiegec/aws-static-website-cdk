@@ -1,5 +1,9 @@
 {
   "name": "aws-static-website-cdk",
+  "description": "Use S3+CloudFront+Route53 to serve a static website",
+  "keywords": ["aws cdk", "s3", "cloudfront", "route53"],
+  "repository": "github:jiegec/aws-static-website-cdk",
+  "homepage": "https://github.com/jiegec/aws-static-website-cdk",
   "version": "0.1.3",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
