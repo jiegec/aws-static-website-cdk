@@ -10,7 +10,7 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@aws-cdk/assert": "1.59.0",
+    "@aws-cdk/assert": "^1.59.0",
     "@types/jest": "^26.0.4",
     "@types/node": "10.17.27",
     "jest": "^26.0.4",
@@ -18,14 +18,14 @@
     "typescript": "~3.9.6"
   },
   "peerDependencies": {
-    "@aws-cdk/core": "1.59.0"
+    "@aws-cdk/core": "^1.59.0"
   },
   "dependencies": {
-    "@aws-cdk/aws-cloudfront": "1.59.0",
-    "@aws-cdk/aws-route53": "1.59.0",
-    "@aws-cdk/aws-route53-targets": "1.59.0",
-    "@aws-cdk/aws-s3": "1.59.0",
-    "@aws-cdk/aws-s3-deployment": "1.59.0",
-    "@aws-cdk/core": "1.59.0"
+    "@aws-cdk/aws-cloudfront": "^1.59.0",
+    "@aws-cdk/aws-route53": "^1.59.0",
+    "@aws-cdk/aws-route53-targets": "^1.59.0",
+    "@aws-cdk/aws-s3": "^1.59.0",
+    "@aws-cdk/aws-s3-deployment": "^1.59.0",
+    "@aws-cdk/core": "^1.59.0"
   }
 }
