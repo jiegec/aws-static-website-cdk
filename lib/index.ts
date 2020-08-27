@@ -23,9 +23,13 @@ export interface AwsStaticWebsiteCdkProps {
    */
   distributionPaths: string[];
   /**
-   * The ID of iam certificate
+   * The ID of iam certificate.
    */
   iamCertId: string;
+  /**
+   * Additional CloudFront props.
+   */
+  additionalCloudFrontProps?: cloudfront.CloudFrontWebDistributionProps;
 }
 
 export class AwsStaticWebsiteCdk extends cdk.Construct {
@@ -62,7 +66,8 @@ export class AwsStaticWebsiteCdk extends cdk.Construct {
       ),
       httpVersion: cloudfront.HttpVersion.HTTP2,
       viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-      priceClass: cloudfront.PriceClass.PRICE_CLASS_ALL
+      priceClass: cloudfront.PriceClass.PRICE_CLASS_ALL,
+      ...props.additionalCloudFrontProps
     })
 
     const zone = route53.HostedZone.fromLookup(this, 'HostedZone', {
