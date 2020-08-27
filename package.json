@@ -9,7 +9,7 @@
   ],
   "repository": "github:jiegec/aws-static-website-cdk",
   "homepage": "https://github.com/jiegec/aws-static-website-cdk",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "license": "MIT",
