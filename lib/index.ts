@@ -29,7 +29,7 @@ export interface AwsStaticWebsiteCdkProps {
   /**
    * Additional CloudFront props.
    */
-  additionalCloudFrontProps?: cloudfront.CloudFrontWebDistributionProps;
+  additionalCloudFrontProps?: any;
 }
 
 export class AwsStaticWebsiteCdk extends cdk.Construct {
