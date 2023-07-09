@@ -1,5 +1,6 @@
-import { expect as expectCDK, haveResource, SynthUtils } from '@aws-cdk/assert';
-import * as cdk from '@aws-cdk/core';
+import { Construct } from 'constructs';
+import * as cdk from 'aws-cdk-lib';
+import { Template } from 'aws-cdk-lib/assertions';
 import * as AwsStaticWebsiteCdk from '../lib/index';
 import { assert } from 'console';
 
@@ -8,7 +9,7 @@ test('Static Website Created', () => {
   const stack = new cdk.Stack(app, "TestStack");
 
   const previous = cdk.ContextProvider.getValue;
-  cdk.ContextProvider.getValue = (_scope: cdk.Construct, options: cdk.GetContextValueOptions) => {
+  cdk.ContextProvider.getValue = (_scope: Construct, options: cdk.GetContextValueOptions) => {
     assert(options.provider === 'hosted-zone');
     return {
       value: {
@@ -28,6 +29,7 @@ test('Static Website Created', () => {
     iamCertId: '1234567890',
   });
   // THEN
-  expectCDK(stack).to(haveResource("AWS::S3::Bucket"));
+  const template = Template.fromStack(stack);
+  template.hasResource("AWS::S3::Bucket", {});
   cdk.ContextProvider.getValue = previous;
 });

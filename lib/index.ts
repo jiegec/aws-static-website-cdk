@@ -1,9 +1,10 @@
-import * as cdk from '@aws-cdk/core';
-import * as s3 from '@aws-cdk/aws-s3';
-import * as s3Deployment from '@aws-cdk/aws-s3-deployment';
-import * as cloudfront from '@aws-cdk/aws-cloudfront';
-import * as route53 from '@aws-cdk/aws-route53';
-import * as route53targets from '@aws-cdk/aws-route53-targets';
+import { Construct } from 'constructs';
+import * as cdk from 'aws-cdk-lib';
+import * as s3 from 'aws-cdk-lib/aws-s3';
+import * as s3Deployment from 'aws-cdk-lib/aws-s3-deployment';
+import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
+import * as route53 from 'aws-cdk-lib/aws-route53';
+import * as route53targets from 'aws-cdk-lib/aws-route53-targets';
 
 export interface AwsStaticWebsiteCdkProps {
   /**
@@ -32,11 +33,11 @@ export interface AwsStaticWebsiteCdkProps {
   additionalCloudFrontProps?: any;
 }
 
-export class AwsStaticWebsiteCdk extends cdk.Construct {
+export class AwsStaticWebsiteCdk extends Construct {
   public readonly s3Bucket: s3.Bucket;
   public readonly distribution: cloudfront.CloudFrontWebDistribution;
 
-  constructor(scope: cdk.Construct, id: string, props: AwsStaticWebsiteCdkProps) {
+  constructor(scope: Construct, id: string, props: AwsStaticWebsiteCdkProps) {
     super(scope, id);
 
     const hostName = `${props.recordName}.${props.domainZoneName}`;
