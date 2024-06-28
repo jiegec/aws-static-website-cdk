@@ -44,6 +44,12 @@ export class AwsStaticWebsiteCdk extends Construct {
 
     this.s3Bucket = new s3.Bucket(this, 'WebBucket', {
       publicReadAccess: true,
+      blockPublicAccess: {
+        blockPublicAcls: false,
+        blockPublicPolicy: false,
+        ignorePublicAcls: false,
+        restrictPublicBuckets: false,
+      },
       removalPolicy: cdk.RemovalPolicy.DESTROY,
       websiteIndexDocument: "index.html",
       bucketName: hostName,
